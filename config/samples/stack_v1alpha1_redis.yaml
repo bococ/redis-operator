@@ -1,0 +1,21 @@
+apiVersion: stack.zncdata.net/v1alpha1
+kind: Redis
+metadata:
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/instance: redis-sample
+    app.kubernetes.io/part-of: redis-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: redis-operator
+  name: redis-sample
+spec:
+  # TODO(user): Add fields here
+  replicas: 3
+  image: 
+    repository: bitnami/redis
+    tag: 7.0.12
+    pullPolicy: IfNotPresent
+  resource:
+    requests:
+      cpu: 10m
+      memory: 64Mi

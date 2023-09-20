@@ -1,0 +1,6 @@
+Schema: olm.semver
+GenerateMajorChannels: true
+GenerateMinorChannels: true
+Stable:
+  Bundles:
+  - Image: docker-test.zncdata.net/liyu/redis-operator-bundle:v0.0.4
