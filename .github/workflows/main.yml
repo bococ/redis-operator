@@ -18,20 +18,22 @@ jobs:
 
     - name: Build Docker Image
       run: |
+        ls
+        pwd
         make docker-buildx
-      working-directory: /path/to/your/repository  # 根据你的实际情况进行调整
+      working-directory: ./  # 根据你的实际情况进行调整
 
     - name: Build Bundle
       run: |
         make bundle
-      working-directory: /path/to/your/repository
+      working-directory: ./
 
     - name: Build Bundle with Docker Buildx
       run: |
         make bundle-buildx
-      working-directory: /path/to/your/repository
+      working-directory: ./
 
     - name: Build Catalog with Docker Buildx
       run: |
         make catalog-buildx
-      working-directory: /path/to/your/repository
+      working-directory: ./
