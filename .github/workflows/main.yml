@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # 根据你的主分支名称进行调整
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build Docker Image
+      run: |
+        make docker-buildx
+      working-directory: /path/to/your/repository  # 根据你的实际情况进行调整
+
+    - name: Build Bundle
+      run: |
+        make bundle
+      working-directory: /path/to/your/repository
+
+    - name: Build Bundle with Docker Buildx
+      run: |
+        make bundle-buildx
+      working-directory: /path/to/your/repository
+
+    - name: Build Catalog with Docker Buildx
+      run: |
+        make catalog-buildx
+      working-directory: /path/to/your/repository
