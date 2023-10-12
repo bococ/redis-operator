@@ -1,39 +1,57 @@
-name: CI/CD Pipeline
+# 定义工作流的名称
+name: Build and Push Docker Image
 
 on:
-  push:
+  workflow_dispatch: # 允许手动触发工作流
+  push: # 当有代码推送事件发生时
     branches:
-      - main  # 根据你的主分支名称进行调整
+      - main # 只有推送到 master 分支时才触发
 
+# 定义工作流的任务
 jobs:
-  build:
+  build-image:
+    # 定义运行此任务的环境：最新版本的 ubuntu
     runs-on: ubuntu-latest
 
+    # 定义任务中的步骤
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      # 检出代码。只检出最新的1次提交
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      # 设置 QEMU 模拟器，这通常用于多平台的 Docker 构建
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
-    - name: Build Docker Image
-      run: |
-        ls
-        pwd
-        make docker-buildx
-      working-directory: ./  # 根据你的实际情况进行调整
+      # 设置 Docker Buildx，用于构建多平台的 Docker 镜像
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - name: Build Bundle
-      run: |
-        make bundle
-      working-directory: ./
+      # 登录到 QUAY Hub
+      - name: Login to quay.io
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }} # 使用存储在 GitHub Secrets 中的 QUAY 用户名
+          password: ${{ secrets.QUAY_PASSWORD }} # 使用存储在 GitHub Secrets 中的 QUAY 密码
 
-    - name: Build Bundle with Docker Buildx
-      run: |
-        make bundle-buildx
-      working-directory: ./
+      - name: Build Docker Image
+        run: |
+          make docker-buildx
+        working-directory: ./  # 根据你的实际情况进行调整
 
-    - name: Build Catalog with Docker Buildx
-      run: |
-        make catalog-buildx
-      working-directory: ./
+      - name: Build Bundle
+        run: |
+          make bundle
+        working-directory: ./
+
+      - name: Build Bundle with Docker Buildx
+        run: |
+          make bundle-buildx
+        working-directory: ./
+
+      - name: Build Catalog with Docker Buildx
+        run: |
+          make catalog-buildx
+        working-directory: ./
