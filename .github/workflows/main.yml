@@ -53,5 +53,6 @@ jobs:
 
       - name: Build Catalog with Docker Buildx
         run: |
+          opm alpha render-template semver -o yaml < redis-operator-template.yaml > catalog/operator.yaml
           make catalog-buildx
         working-directory: ./
