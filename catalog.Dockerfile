@@ -1,6 +1,6 @@
 # The base image is expected to contain
 # /bin/opm (with a serve subcommand) and /bin/grpc_health_probe
-FROM docker-test.zncdata.net/liyu/redis-operator-bundle:v0.0.4
+FROM quay.io/plutoso/redis-operator-bundle:v0.0.4
 
 # Configure the entrypoint and command
 ENTRYPOINT ["/bin/opm"]

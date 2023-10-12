@@ -3,4 +3,4 @@ GenerateMajorChannels: true
 GenerateMinorChannels: true
 Stable:
   Bundles:
-  - Image: docker-test.zncdata.net/liyu/redis-operator-bundle:v0.0.4
+  - Image: quay.io/plutoso/redis-operator-bundle:v0.0.4
