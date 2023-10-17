@@ -62,7 +62,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          echo $VERSION
+          export VERSION=0.0.1-alpha
           make docker-push
           make bundle
           make bundle-buildx
