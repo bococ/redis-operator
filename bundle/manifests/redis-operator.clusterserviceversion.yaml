@@ -34,10 +34,10 @@ metadata:
         }
       ]
     capabilities: Basic Install
-    createdAt: "2023-10-12T09:33:06Z"
+    createdAt: "2023-10-17T03:20:36Z"
     operators.operatorframework.io/builder: operator-sdk-v1.31.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: redis-operator.v0.0.2
+  name: redis-operator.v0.0.1-alpha
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -232,7 +232,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: quay.io/plutoso/redis-operator:0.0.2
+                image: quay.io/plutoso/redis-operator:latest
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -314,4 +314,4 @@ spec:
   maturity: alpha
   provider:
     name: redis
-  version: 0.0.2
+  version: 0.0.1-alpha

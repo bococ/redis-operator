@@ -6,6 +6,9 @@ on:
   push: # 当有代码推送事件发生时
     branches:
       - main # 只有推送到 master 分支时才触发
+  pull_request:
+    branches:
+      - '*'
 
 # 定义工作流的任务
 jobs:
@@ -38,7 +41,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          export VERSION=latest
+          export VERSION=0.0.1-alpha
           make docker-buildx
           make bundle
           make bundle-buildx

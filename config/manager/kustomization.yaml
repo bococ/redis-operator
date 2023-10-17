@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: quay.io/plutoso/redis-operator
-  newTag: 0.0.2
+  newTag: latest
