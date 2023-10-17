@@ -33,7 +33,7 @@ jobs:
 
       # 登录到 QUAY Hub
       - name: Login to quay.io
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3.0.0
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }} # 使用存储在 GitHub Secrets 中的 QUAY 用户名
