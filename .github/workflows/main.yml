@@ -28,16 +28,28 @@ jobs:
       # 设置 Docker Buildx，用于构建多平台的 Docker 镜像
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
- 
-  linting:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-buildx-action@v2
       - run: |
           export VERSION=0.0.1-alpha
           make docker-build
+ 
+  linting:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_MARKDOWN: true
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
 
+          LINTER_RULES_PATH: /
+          MARKDOWN_CONFIG_FILE: .markdownlint.yml
 
   deploy:
     if: github.event_name == 'push' && github.repository == 'bococ/redis-operator'
