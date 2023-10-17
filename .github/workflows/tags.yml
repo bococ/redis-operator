@@ -38,7 +38,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          echo $GITHUB_REF_NAME
           export VERSION=$GITHUB_REF_NAME
           make docker-buildx
           make bundle
