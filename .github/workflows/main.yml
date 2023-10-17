@@ -22,9 +22,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
-        run: |
-          pwd
-          ls
 
       # 设置 QEMU 模拟器，这通常用于多平台的 Docker 构建
       - name: Set up QEMU
