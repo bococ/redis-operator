@@ -1,7 +1,0 @@
-Schema: olm.semver
-GenerateMajorChannels: true
-GenerateMinorChannels: true
-Stable:
-  Bundles:
-  - Image: quay.io/plutoso/redis-operator-bundle:v0.0.2
-  - Image: quay.io/plutoso/redis-operator-bundle:v0.0.3
