@@ -55,7 +55,7 @@ jobs:
           MARKDOWN_CONFIG_FILE: .markdownlint.yml
 
   deploy:
-    if: github.event_name == 'push' && github.repository == 'bococ/redis-operator'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'bococ/redis-operator'
     runs-on: ubuntu-latest
     needs:
       - build
